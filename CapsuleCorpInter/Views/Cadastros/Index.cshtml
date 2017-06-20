@@ -1,10 +1,17 @@
 ﻿@model IEnumerable<CapsuleCorpInter.Models.Cadastro>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Menu de Cadastro";
 }
 
 <h2>Index</h2>
+
+
+ <button>@Html.ActionLink("Cadastrar Clientes", "Index", "Clientes")</button>
+
+
+ <button>@Html.ActionLink("Cadastrar Coberturas", "Index", "Coberturas")</button>
+
 
 <p>
     @Html.ActionLink("Create New", "Create")

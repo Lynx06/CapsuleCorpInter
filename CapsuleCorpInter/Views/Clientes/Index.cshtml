@@ -1,13 +1,17 @@
 ﻿@model IEnumerable<CapsuleCorpInter.Models.Cliente>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Menu de Cadastro Cliente";
 }
 
 <h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+   <button>@Html.ActionLink("Voltar", "Index", "Cadastros")</button>
+</p>
+    
+<p>
+    @Html.ActionLink("Adicionar novo Cliente", "Create")
+    
 </p>
 <table class="table">
     <tr>
@@ -65,9 +69,9 @@
             @Html.DisplayFor(modelItem => item.DataNascimento)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ClienteId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ClienteId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ClienteId })
+            @Html.ActionLink("Editar Dados", "Edit", new { id=item.ClienteId }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.ClienteId }) |
+            @Html.ActionLink("Deletar", "Delete", new { id=item.ClienteId })
         </td>
     </tr>
 }
