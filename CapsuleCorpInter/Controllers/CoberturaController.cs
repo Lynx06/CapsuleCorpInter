@@ -45,5 +45,39 @@ namespace CapsuleCorpInter.Controllers
                             coberturas.Select(m => m.CoberturaId).Max() + 1;
             return RedirectToAction("Index");
         }
+
+        public ActionResult Edit(long id)
+        {
+            return View(coberturas.Where(m => m.CoberturaId == id).First());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Cobertura cobertura)
+        {
+            coberturas.Remove(coberturas.Where(
+                            c => c.CoberturaId == cobertura.CoberturaId)
+                            .First());
+            coberturas.Add(cobertura);
+            return RedirectToAction("Index");
+        }        public ActionResult Details(long id)
+        {
+            return View(coberturas.Where(
+                            m => m.CoberturaId == id).First());
+        }        public ActionResult Delete(long id)
+        {
+            return View(coberturas.Where(
+                            m => m.CoberturaId == id).First());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(Cobertura cobertura)
+        {
+            coberturas.Remove(coberturas.Where(
+                            c => c.CoberturaId == cobertura.CoberturaId)
+                            .First());
+            return RedirectToAction("Index");
+        }
     }
 }
