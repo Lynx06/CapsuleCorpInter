@@ -13,7 +13,6 @@ namespace CapsuleCorpInter.Contexts
         public EFContext() : base("Asp_Net_MVC_CS") { }
 
         public DbSet<Cobertura> coberturas { get; set; }
-        public DbSet<Cliente> Clientes
-        { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
     }
 }
