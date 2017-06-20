@@ -127,29 +127,26 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
-    <Content Include="Views\Cobertura\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Contexts\EFContext.cs" />
+    <Compile Include="Controllers\CadastrosController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
-    <Compile Include="Controllers\CoberturaController.cs" />
+    <Compile Include="Controllers\CoberturasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cadastro.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Cobertura.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Cobertura.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Cobertura\Index.cshtml" />
-    <Content Include="Views\Cobertura\Edit.cshtml" />
-    <Content Include="Views\Cobertura\Details.cshtml" />
-    <Content Include="Views\Cobertura\Delete.cshtml" />
     <Content Include="Views\Clientes\Index.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
@@ -157,6 +154,16 @@
     <Content Include="Views\Clientes\Edit.cshtml" />
     <Content Include="Views\Clientes\Details.cshtml" />
     <Content Include="Views\Clientes\Delete.cshtml" />
+    <Content Include="Views\Cadastros\Index.cshtml" />
+    <Content Include="Views\Coberturas\Index.cshtml" />
+    <Content Include="Views\Coberturas\Create.cshtml" />
+    <Content Include="Views\Coberturas\Edit.cshtml" />
+    <Content Include="Views\Coberturas\Details.cshtml" />
+    <Content Include="Views\Coberturas\Delete.cshtml" />
+    <Content Include="Views\Cadastros\Create.cshtml" />
+    <Content Include="Views\Cadastros\Edit.cshtml" />
+    <Content Include="Views\Cadastros\Details.cshtml" />
+    <Content Include="Views\Cadastros\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

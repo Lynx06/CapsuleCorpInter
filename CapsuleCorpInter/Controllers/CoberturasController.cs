@@ -10,16 +10,17 @@ using System.Web.Mvc;
 
 namespace CapsuleCorpInter.Controllers
 {
-    public class ClientesController : Controller
+    public class CoberturasController : Controller
     {
+
         private EFContext context = new EFContext();
 
-        // GET: Clientes
+        //	GET:	Coberturas
         public ActionResult Index()
         {
-            return View(context.Clientes.OrderBy(c => c.Nome));
-        }
-
+            return View(context.Coberturas.OrderBy(
+                            c => c.Nome));
+        }
         public ActionResult Create()
         {
             return View();
@@ -27,57 +28,60 @@ namespace CapsuleCorpInter.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Cliente cliente)
+        public ActionResult Create(Cobertura cobertura)
         {
-            context.Clientes.Add(cliente);
+            context.Coberturas.Add(cobertura);
             context.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        //	GET:	Fabricantes/Edit/5
+        //	GET:	Coberturas/Edit/5
         public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new
-                       HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                                HttpStatusCodeResult(
+                                HttpStatusCode.BadRequest);
             }
-            Cliente cliente = context.Clientes.Find(id);
-            if (cliente == null)
+            Cobertura cobertura = context.Coberturas.Find(id);
+            if (cobertura == null)
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View(cobertura);
         }
 
-        //	POST:	Fabricantes/Edit/5
+        //	POST:	Coberturas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Cliente cliente)
+        public ActionResult Edit(Cobertura cobertura)
         {
             if (ModelState.IsValid)
             {
-                context.Entry(cliente).State = EntityState.Modified;
+                context.Entry(cobertura).State =
+                                                   EntityState.Modified;
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cliente);
+            return View(cobertura);
         }
 
-        //	GET:	Testes/Details/5
+        //	GET:	Coberturas/Details/5
         public ActionResult Details(long? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(
+                                HttpStatusCode.BadRequest);
             }
-            Cliente cliente = context.Clientes.
+            Cobertura cobertura = context.Coberturas.
                             Find(id);
-            if (cliente == null)
+            if (cobertura == null)
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View(cobertura);
         }
 
         //	GET:	Fabricantes/Delete/5
@@ -85,23 +89,25 @@ namespace CapsuleCorpInter.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(
+                                HttpStatusCode.BadRequest);
             }
-            Cliente cliente = context.Clientes.Find(id);
-            if (cliente == null)
+            Cobertura cobertura = context.Coberturas.Find(id);
+            if (cobertura == null)
             {
                 return HttpNotFound();
             }
-            return View(cliente);
-        }
+            return View(cobertura);
+            }
 
         //	POST:	Fabricantes/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(long id)
         {
-            Cliente cliente = context.Clientes.Find(id);
-            context.Clientes.Remove(cliente);
+            Cobertura cobertura = context.Coberturas.
+                            Find(id);
+            context.Coberturas.Remove(cobertura);
             context.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -16,5 +16,7 @@ namespace CapsuleCorpInter.Models
         public int DddCelular { get; set; }
         public int Celular { get; set; }
         public string DataNascimento { get; set; }
+
+        public virtual ICollection<Cadastro> Cadastros { get; set; }
     }
 }
