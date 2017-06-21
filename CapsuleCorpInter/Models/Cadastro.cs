@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -9,6 +10,7 @@ namespace CapsuleCorpInter.Models
     public class Cadastro
     {
         public long? CadastroId { get; set; }
+        [DisplayName("1234566")]
         public string Nome { get; set; }
 
         public long? CoberturaId { get; set; }

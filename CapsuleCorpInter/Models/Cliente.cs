@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -15,7 +16,8 @@ namespace CapsuleCorpInter.Models
         public int Telefone { get; set; }
         public int DddCelular { get; set; }
         public int Celular { get; set; }
-        public string DataNascimento { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime DataNascimento { get; set; }
 
         public virtual ICollection<Cadastro> Cadastros { get; set; }
     }
