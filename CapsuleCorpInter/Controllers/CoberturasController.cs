@@ -1,11 +1,8 @@
-﻿using CapsuleCorpInter.Contexts;
-using CapsuleCorpInter.Models;
-using System;
-using System.Collections.Generic;
+﻿using Modelo.Tabelas;
+using Persistencia.Contexts;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CapsuleCorpInter.Controllers

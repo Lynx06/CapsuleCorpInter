@@ -1,5 +1,5 @@
-﻿using CapsuleCorpInter.Contexts;
-using CapsuleCorpInter.Models;
+﻿using Modelo.Cadastros;
+using Persistencia.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

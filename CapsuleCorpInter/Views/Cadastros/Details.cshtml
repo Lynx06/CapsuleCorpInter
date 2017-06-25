@@ -1,10 +1,14 @@
-﻿@model CapsuleCorpInter.Models.Cadastro
+﻿@model Modelo.Cadastros.Cadastro
 
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
+
+<div class="panel-body">
+    @Html.Partial("~/Views/Produtos/_PartialDetailsContentPanel.cshtml", Model)
+</div>
 
 <div>
     <h4>Cadastro</h4>

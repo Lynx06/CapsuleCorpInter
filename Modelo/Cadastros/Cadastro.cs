@@ -1,11 +1,12 @@
 ﻿
+using Modelo.Tabelas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
-namespace CapsuleCorpInter.Models
+namespace Modelo.Cadastros
 {
     public class Cadastro
     {

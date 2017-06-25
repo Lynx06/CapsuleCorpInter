@@ -130,16 +130,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Contexts\EFContext.cs" />
     <Compile Include="Controllers\CadastrosController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\CoberturasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cadastro.cs" />
-    <Compile Include="Models\Cliente.cs" />
-    <Compile Include="Models\Cobertura.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +160,7 @@
     <Content Include="Views\Cadastros\Edit.cshtml" />
     <Content Include="Views\Cadastros\Details.cshtml" />
     <Content Include="Views\Cadastros\Delete.cshtml" />
+    <Content Include="Views\Cadastros\_PartialDetailsContentPanel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -171,7 +168,24 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Contexts\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Modelo\Modelo.csproj">
+      <Project>{9d641854-5bfd-4547-9855-8019152b5f51}</Project>
+      <Name>Modelo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistencia\Persistencia.csproj">
+      <Project>{0c8ef16d-718c-44f2-807e-e5fa8b5b3035}</Project>
+      <Name>Persistencia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Servico\Servico.csproj">
+      <Project>{A8AABB34-00AD-41E7-9613-4C822DEAFC0A}</Project>
+      <Name>Servico</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
