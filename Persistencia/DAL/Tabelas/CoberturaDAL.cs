@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Persistencia.DAL.Tabelas
 {
-    class CoberturaDAL
+    public class CoberturaDAL
     {
         private EFContext context = new EFContext();
         public IQueryable<Cobertura>

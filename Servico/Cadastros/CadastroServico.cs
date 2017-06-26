@@ -11,6 +11,7 @@ namespace Servico.Cadastros
     public class CadastroServico
     {
         private CadastroDAL cadastroDAL = new CadastroDAL();
+
         public IQueryable ObterProdutosClassificadosPorNome()
         {
             return cadastroDAL.ObterProdutosClassificadosPorNome();

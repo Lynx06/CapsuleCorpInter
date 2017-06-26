@@ -182,7 +182,7 @@
       <Name>Persistencia</Name>
     </ProjectReference>
     <ProjectReference Include="..\Servico\Servico.csproj">
-      <Project>{A8AABB34-00AD-41E7-9613-4C822DEAFC0A}</Project>
+      <Project>{a8aabb34-00ad-41e7-9613-4c822deafc0a}</Project>
       <Name>Servico</Name>
     </ProjectReference>
   </ItemGroup>

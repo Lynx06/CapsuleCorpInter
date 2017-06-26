@@ -5,7 +5,7 @@ using Modelo.Cadastros;
 
 namespace Persistencia.DAL.Cadastros
 {
-    class CadastroDAL
+    public class CadastroDAL
     {
         private EFContext context = new EFContext();
 

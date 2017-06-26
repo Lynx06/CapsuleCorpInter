@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Persistencia.DAL.Cadastros
 {
-    class ClienteDAL
+    public class ClienteDAL
     {
         private EFContext context = new EFContext();
         public IQueryable<Cliente>

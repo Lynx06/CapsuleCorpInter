@@ -44,19 +44,19 @@ namespace CapsuleCorpInter.Controllers
         {
             if (cadastro == null)
             {
-                ViewBag.CategoriaId = new SelectList(coberturaServico.
+                ViewBag.CoberturaId = new SelectList(coberturaServico.
                                 ObterCategoriasClassificadasPorNome(),
                                 "CoberturaId", "Nome");
-                ViewBag.FabricanteId = new SelectList(clienteServico.
+                ViewBag.ClienteId = new SelectList(clienteServico.
                                 ObterFabricantesClassificadosPorNome(),
                                 "ClienteId", "Nome");
             }
             else
             {
-                ViewBag.CategoriaId = new SelectList(coberturaServico.
+                ViewBag.CoberturaId = new SelectList(coberturaServico.
                                 ObterCategoriasClassificadasPorNome(),
                                 "CoberturaId", "Nome", cadastro.CoberturaId);
-                ViewBag.FabricanteId = new SelectList(clienteServico.
+                ViewBag.ClienteId = new SelectList(clienteServico.
                                 ObterFabricantesClassificadosPorNome(),
                                 "ClienteId", "Nome", cadastro.ClienteId);
             }
