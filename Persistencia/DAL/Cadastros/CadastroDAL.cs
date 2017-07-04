@@ -9,18 +9,22 @@ namespace Persistencia.DAL.Cadastros
     {
         private EFContext context = new EFContext();
 
-        public IQueryable ObterProdutosClassificadosPorNome()
+        public IQueryable ObterCadastrosClassificadosPorNome()
         {
             return context.Cadastros.Include(c => c.Cobertura).
                             Include(f => f.Cliente).OrderBy(n => n.Nome);
         }
-        public Cadastro ObterProdutoPorId(long id)
+
+
+        public Cadastro ObterCadastroPorId(long id)
         {
             return context.Cadastros.Where(p => p.CadastroId == id).
                             Include(c => c.Cobertura).Include(f =>
                          f.Cliente).First();
         }
-        public void GravarProduto(Cadastro cadastro)
+
+
+        public void GravarCadastro(Cadastro cadastro)
         {
             if (cadastro.CadastroId == null)
             {
@@ -33,9 +37,10 @@ namespace Persistencia.DAL.Cadastros
             }
             context.SaveChanges();
         }
-        public Cadastro EliminarProdutoPorId(long id)
+
+        public Cadastro EliminarCadastroPorId(long id)
         {
-            Cadastro cadastro = ObterProdutoPorId(id);
+            Cadastro cadastro = ObterCadastroPorId(id);
             context.Cadastros.Remove(cadastro);
             context.SaveChanges();
             return cadastro;

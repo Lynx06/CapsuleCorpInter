@@ -21,18 +21,18 @@ namespace CapsuleCorpInter.Controllers
         // GET: Cadastros
         public ActionResult Index()
         {
-            return View(cadastroServico.ObterProdutosClassificadosPorNome());
+            return View(cadastroServico.ObterCadastrosClassificadosPorNome());
         }
 
 
-        private ActionResult ObterVisaoProdutoPorId(long? id)
+        private ActionResult ObterVisaoCadastroPorId(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(
                                 HttpStatusCode.BadRequest);
             }
-            Cadastro cadastro = cadastroServico.ObterProdutoPorId((long)id);
+            Cadastro cadastro = cadastroServico.ObterCadastroPorId((long)id);
             if (cadastro == null)
             {
                 return HttpNotFound();
@@ -45,28 +45,28 @@ namespace CapsuleCorpInter.Controllers
             if (cadastro == null)
             {
                 ViewBag.CoberturaId = new SelectList(coberturaServico.
-                                ObterCategoriasClassificadasPorNome(),
+                                ObterCoberturasClassificadosPorNome(),
                                 "CoberturaId", "Nome");
                 ViewBag.ClienteId = new SelectList(clienteServico.
-                                ObterFabricantesClassificadosPorNome(),
+                                ObterClientesClassificadosPorNome(),
                                 "ClienteId", "Nome");
             }
             else
             {
                 ViewBag.CoberturaId = new SelectList(coberturaServico.
-                                ObterCategoriasClassificadasPorNome(),
+                                ObterCoberturasClassificadosPorNome(),
                                 "CoberturaId", "Nome", cadastro.CoberturaId);
                 ViewBag.ClienteId = new SelectList(clienteServico.
-                                ObterFabricantesClassificadosPorNome(),
+                                ObterClientesClassificadosPorNome(),
                                 "ClienteId", "Nome", cadastro.ClienteId);
             }
-        }        // Metodo para responder as requisiçoes POST        private ActionResult GravarProduto(Cadastro cadastro)
+        }        // Metodo para responder as requisiçoes POST        private ActionResult GravarCadastro(Cadastro cadastro)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    cadastroServico.GravarProduto(cadastro);
+                    cadastroServico.GravarCadastro(cadastro);
                     return RedirectToAction("Index");
                 }
                 return View(cadastro);
@@ -80,7 +80,7 @@ namespace CapsuleCorpInter.Controllers
         // GET: Cadastros/Details/5
         public ActionResult Details(long? id)
         {
-            return ObterVisaoProdutoPorId(id);
+            return ObterVisaoCadastroPorId(id);
         }
 
         // GET: Cadastros/Create
@@ -94,27 +94,27 @@ namespace CapsuleCorpInter.Controllers
         [HttpPost]
         public ActionResult Create(Cadastro cadastro)
         {
-            return GravarProduto(cadastro);
+            return GravarCadastro(cadastro);
         }
 
         // GET: Cadastros/Edit/5
         public ActionResult Edit(int? id)
         {
-            PopularViewBag(cadastroServico.ObterProdutoPorId((long)id));
-            return ObterVisaoProdutoPorId(id);
+            PopularViewBag(cadastroServico.ObterCadastroPorId((long)id));
+            return ObterVisaoCadastroPorId(id);
         }
 
         // POST: Cadastros/Edit/5
         [HttpPost]
         public ActionResult Edit(Cadastro cadastro)
         {
-            return GravarProduto(cadastro);
+            return GravarCadastro(cadastro);
         }
 
         // GET: Cadastros/Delete/5
         public ActionResult Delete(long? id)
         {
-            return ObterVisaoProdutoPorId(id);
+            return ObterVisaoCadastroPorId(id);
         }
 
         // POST: Cadastros/Delete/5
@@ -123,7 +123,7 @@ namespace CapsuleCorpInter.Controllers
         {
             try
             {
-                Cadastro cadastro = cadastroServico.EliminarProdutoPorId(id);
+                Cadastro cadastro = cadastroServico.EliminarCadastroPorId(id);
                 TempData["Message"] = "Cadastro	" + cadastro.Nome.ToUpper()
                                 + "	foi	removido";
                 return RedirectToAction("Index");

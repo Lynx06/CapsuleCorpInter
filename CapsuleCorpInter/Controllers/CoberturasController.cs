@@ -1,7 +1,5 @@
 ﻿using Modelo.Tabelas;
-using Persistencia.Contexts;
-using System.Data.Entity;
-using System.Linq;
+using Servico.Tabelas;
 using System.Net;
 using System.Web.Mvc;
 
@@ -10,103 +8,121 @@ namespace CapsuleCorpInter.Controllers
     public class CoberturasController : Controller
     {
 
-        private EFContext context = new EFContext();
+        private CoberturaServico coberturaServico =
+                        new CoberturaServico();
 
-        //	GET:	Coberturas
+
+        // GET: Cadastros
         public ActionResult Index()
         {
-            return View(context.Coberturas.OrderBy(
-                            c => c.Nome));
-        }
+            return View(coberturaServico.ObterCoberturasClassificadosPorNome());
+        }
+
+
+        private ActionResult ObterVisaoCoberturaPorId(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(
+                                HttpStatusCode.BadRequest);
+            }
+            Cobertura cobertura = coberturaServico.ObterCoberturaPorId((long)id);
+            if (cobertura == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cobertura);
+        }
+
+        private void PopularViewBag(Cobertura cobertura = null)
+        {
+            if (cobertura == null)
+            {
+                ViewBag.CoberturaId = new SelectList(coberturaServico.
+                                ObterCoberturasClassificadosPorNome(),
+                                "CoberturaId", "Nome");
+            }
+            else
+            {
+                ViewBag.CoberturaId = new SelectList(coberturaServico.
+                                ObterCoberturasClassificadosPorNome(),
+                                "CoberturaId", "Nome", cobertura.CoberturaId);
+            }
+        }
+
+        // Metodo para responder as requisiçoes POST
+        private ActionResult GravarCobertura(Cobertura cobertura)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    coberturaServico.GravarCobertura(cobertura);
+                    return RedirectToAction("Index");
+                }
+                return View(cobertura);
+            }
+            catch
+            {
+                return View(cobertura);
+            }
+        }
+
+        // GET: Cadastros/Details/5
+        public ActionResult Details(long? id)
+        {
+            return ObterVisaoCoberturaPorId(id);
+        }
+
+        // GET: Cadastros/Create
         public ActionResult Create()
         {
+            PopularViewBag();
             return View();
         }
 
+        // POST: Cadastros/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(Cobertura cobertura)
         {
-            context.Coberturas.Add(cobertura);
-            context.SaveChanges();
-            return RedirectToAction("Index");
+            return GravarCobertura(cobertura);
         }
 
-        //	GET:	Coberturas/Edit/5
-        public ActionResult Edit(long? id)
+        // GET: Cadastros/Edit/5
+        public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new
-                                HttpStatusCodeResult(
-                                HttpStatusCode.BadRequest);
-            }
-            Cobertura cobertura = context.Coberturas.Find(id);
-            if (cobertura == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cobertura);
+            PopularViewBag(coberturaServico.ObterCoberturaPorId((long)id));
+            return ObterVisaoCoberturaPorId(id);
         }
 
-        //	POST:	Coberturas/Edit/5
+        // POST: Cadastros/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit(Cobertura cobertura)
         {
-            if (ModelState.IsValid)
-            {
-                context.Entry(cobertura).State =
-                                                   EntityState.Modified;
-                context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(cobertura);
+            return GravarCobertura(cobertura);
         }
 
-        //	GET:	Coberturas/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(
-                                HttpStatusCode.BadRequest);
-            }
-            Cobertura cobertura = context.Coberturas.
-                            Find(id);
-            if (cobertura == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cobertura);
-        }
-
-        //	GET:	Fabricantes/Delete/5
+        // GET: Cadastros/Delete/5
         public ActionResult Delete(long? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(
-                                HttpStatusCode.BadRequest);
-            }
-            Cobertura cobertura = context.Coberturas.Find(id);
-            if (cobertura == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cobertura);
-            }
+            return ObterVisaoCoberturaPorId(id);
+        }
 
-        //	POST:	Fabricantes/Delete/5
+        // POST: Cadastros/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(long id)
         {
-            Cobertura cobertura = context.Coberturas.
-                            Find(id);
-            context.Coberturas.Remove(cobertura);
-            context.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Cobertura cobertura = coberturaServico.EliminarCoberturaPorId(id);
+                TempData["Message"] = "Cobertura" + cobertura.Nome.ToUpper()
+                                + "	foi	removido";
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
     }

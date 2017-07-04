@@ -1,10 +1,6 @@
 ﻿using Persistencia.DAL.Cadastros;
 using Modelo.Cadastros;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Servico.Cadastros
 {
@@ -12,21 +8,24 @@ namespace Servico.Cadastros
     {
         private CadastroDAL cadastroDAL = new CadastroDAL();
 
-        public IQueryable ObterProdutosClassificadosPorNome()
+        public IQueryable ObterCadastrosClassificadosPorNome()
         {
-            return cadastroDAL.ObterProdutosClassificadosPorNome();
+            return cadastroDAL.ObterCadastrosClassificadosPorNome();
         }
-        public Cadastro ObterProdutoPorId(long id)
+
+        public Cadastro ObterCadastroPorId(long id)
         {
-            return cadastroDAL.ObterProdutoPorId(id);
+            return cadastroDAL.ObterCadastroPorId(id);
         }
-        public void GravarProduto(Cadastro produto)
+
+        public void GravarCadastro(Cadastro cadastro)
         {
-            cadastroDAL.GravarProduto(produto);
+            cadastroDAL.GravarCadastro(cadastro);
         }
-        public Cadastro EliminarProdutoPorId(long id)
+
+        public Cadastro EliminarCadastroPorId(long id)
         {
-            return cadastroDAL.EliminarProdutoPorId(id);
+            return cadastroDAL.EliminarCadastroPorId(id);
         }
     }
 }

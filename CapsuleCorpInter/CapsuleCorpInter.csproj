@@ -169,17 +169,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Contexts\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Modelo\Modelo.csproj">
       <Project>{9d641854-5bfd-4547-9855-8019152b5f51}</Project>
       <Name>Modelo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Persistencia\Persistencia.csproj">
-      <Project>{0c8ef16d-718c-44f2-807e-e5fa8b5b3035}</Project>
-      <Name>Persistencia</Name>
     </ProjectReference>
     <ProjectReference Include="..\Servico\Servico.csproj">
       <Project>{a8aabb34-00ad-41e7-9613-4c822deafc0a}</Project>

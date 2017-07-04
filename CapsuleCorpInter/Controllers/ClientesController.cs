@@ -1,110 +1,127 @@
 ﻿using Modelo.Cadastros;
-using Persistencia.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+using Servico.Cadastros;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CapsuleCorpInter.Controllers
 {
     public class ClientesController : Controller
     {
-        private EFContext context = new EFContext();
+        private ClienteServico clienteServico =
+                        new ClienteServico();
 
-        // GET: Clientes
+
+        // GET: Cadastros
         public ActionResult Index()
         {
-            return View(context.Clientes.OrderBy(c => c.Nome));
+            return View(clienteServico.ObterClientesClassificadosPorNome());
         }
 
+
+        private ActionResult ObterVisaoClientePorId(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(
+                                HttpStatusCode.BadRequest);
+            }
+            Cliente cliente = clienteServico.ObterClientePorId((long)id);
+            if (cliente == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cliente);
+        }
+
+        private void PopularViewBag(Cliente cliente = null)
+        {
+            if (cliente == null)
+            {
+                ViewBag.ClienteId = new SelectList(clienteServico.
+                                ObterClientesClassificadosPorNome(),
+                                "ClienteId", "Nome");
+            }
+            else
+            {
+                ViewBag.ClienteId = new SelectList(clienteServico.
+                                ObterClientesClassificadosPorNome(),
+                                "ClienteId", "Nome", cliente.ClienteId);
+            }
+        }
+
+        // Metodo para responder as requisiçoes POST
+        private ActionResult GravarCliente(Cliente cliente)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    clienteServico.GravarCliente(cliente);
+                    return RedirectToAction("Index");
+                }
+                return View(cliente);
+            }
+            catch
+            {
+                return View(cliente);
+            }
+        }
+
+        // GET: Cadastros/Details/5
+        public ActionResult Details(long? id)
+        {
+            return ObterVisaoClientePorId(id);
+        }
+
+        // GET: Cadastros/Create
         public ActionResult Create()
         {
+            PopularViewBag();
             return View();
         }
 
+        // POST: Cadastros/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(Cliente cliente)
         {
-            context.Clientes.Add(cliente);
-            context.SaveChanges();
-            return RedirectToAction("Index");
+            return GravarCliente(cliente);
         }
 
-        //	GET:	Fabricantes/Edit/5
-        public ActionResult Edit(long? id)
+        // GET: Cadastros/Edit/5
+        public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new
-                       HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cliente cliente = context.Clientes.Find(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cliente);
+            PopularViewBag(clienteServico.ObterClientePorId((long)id));
+            return ObterVisaoClientePorId(id);
         }
 
-        //	POST:	Fabricantes/Edit/5
+        // POST: Cadastros/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit(Cliente cliente)
         {
-            if (ModelState.IsValid)
-            {
-                context.Entry(cliente).State = EntityState.Modified;
-                context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(cliente);
+            return GravarCliente(cliente);
         }
 
-        //	GET:	Testes/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cliente cliente = context.Clientes.
-                            Find(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cliente);
-        }
-
-        //	GET:	Fabricantes/Delete/5
+        // GET: Cadastros/Delete/5
         public ActionResult Delete(long? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cliente cliente = context.Clientes.Find(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cliente);
+            return ObterVisaoClientePorId(id);
         }
 
-        //	POST:	Fabricantes/Delete/5
+        // POST: Cadastros/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(long id)
         {
-            Cliente cliente = context.Clientes.Find(id);
-            context.Clientes.Remove(cliente);
-            context.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Cliente cliente = clienteServico.EliminarClientePorId(id);
+                TempData["Message"] = "Cliente	" + cliente.Nome.ToUpper()
+                                + "	foi	removido";
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
-
     }
 }
