@@ -1,0 +1,46 @@
+﻿@model Modelo.Cadastros.Cadastro
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="panel-body">
+    @Html.Partial("~/Views/Cadastros/_PartialDetailsContentPanel.cshtml", Model)
+</div>
+
+<div>
+    <h4>Cadastro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cobertura.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cobertura.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CadastroId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

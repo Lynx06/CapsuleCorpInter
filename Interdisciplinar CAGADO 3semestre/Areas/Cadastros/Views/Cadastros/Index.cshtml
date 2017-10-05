@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Modelo.Cadastros.Cadastro>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+ <button>@Html.ActionLink("Cadastrar Clientes", "Index", "Clientes")</button>
+
+
+ <button>@Html.ActionLink("Cadastrar Coberturas", "Index", "Coberturas")</button>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           <!-- @Html.DisplayNameFor(model => model.Cliente.Nome) -->
+            Nome do Cliente
+        </th>
+        <th>
+           <!-- @Html.DisplayNameFor(model => model.Cobertura.Nome) -->
+            Cobertura
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cobertura.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CadastroId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CadastroId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CadastroId })
+        </td>
+    </tr>
+}
+
+</table>

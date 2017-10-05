@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Modelo.Tabelas.Cobertura>
+
+@{
+    ViewBag.Title = "Menu da Cobertura";
+}
+
+<h2>Index</h2>
+
+<button>@Html.ActionLink("Voltar", "Index", "Cadastros")</button>
+    
+
+<p>
+    @Html.ActionLink("Adicionar Nova Cobertura", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <!--@Html.DisplayNameFor(model => model.Nome) -->
+            Nome Cobertura
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.CoberturaId }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.CoberturaId }) |
+            @Html.ActionLink("Deletar", "Delete", new { id=item.CoberturaId })
+        </td>
+    </tr>
+}
+
+</table>
